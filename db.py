@@ -98,10 +98,10 @@ class Db_manager:
         except:
             return None
 
-    def riempi_carello(self, id_utente, articoli):
+    def riempi_carello(self, id_utente, articolo):
         carello = {
             'id_utente' : '',
-            'articoli' : [],
+            'articol0' : '',
             'totale' : 0
         }
 
@@ -115,14 +115,14 @@ class Db_manager:
             print('utente non riconosciuto')
             return
         
+
         collezione = 'Carrello'
 
-        for articolo in articoli:
-            try:
-                self.__carica_singolo(collezione, articolo)
-                print('caricamento sul carello avvenuto')
-            except:
-                print('errore')
+        try:
+            self.__carica_singolo(collezione, articolo)
+            print('caricamento sul carello avvenuto')
+        except:
+            print('errore')
         pass      
 
     def get_carello(self, id_utente):

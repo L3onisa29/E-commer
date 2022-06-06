@@ -1,3 +1,4 @@
+from nis import cat
 from flask import Flask, redirect, render_template, request, session, url_for
 #from flask_sqlalchemy import SQLAlchemy
 from form import Registration_form, Login_form, Prodotto_form
@@ -20,13 +21,23 @@ def index():
     return render_template('index.html', title = 'Home', connesso = controller.user.state_connected())
 
 # Catalogo
+
+
 @app.route('/catalogo', methods = ['GET', 'POST'])
 def catalogo():
+    '''
+    Funzione creta per gestire le richieste del catalogo
+
+        se è post -> reindirizzare al ceck out
+        se è get:
+            -inserimento dei un prodotto del catalogo
+
+    '''
     if request.method == 'POST':
         pass
 
     if request.args:
-        prodotto = Prodotto(id=request.args.get('id'), nome=request.args.get('nome'), prezzo=request.args.get('prezzo'), stok=request.args.get('stok'), categoria=request.args.get('categoria'))
+        prodotto = Prodotto(id=request.args.get('id'), nome=request.args.get('nome'), produttore=request.args.get('nome_produttore'), prezzo=request.args.get('prezzo'), stok=request.args.get('stok'), categoria=request.args.get('categoria'))
         controller.user.add_prodotto(prodotto)
         
 
@@ -36,7 +47,13 @@ def catalogo():
 # Aggiunta nuovo prodotto
 @app.route('/new-prodotto', methods = ['GET','POST'])
 def new_prodotto():
+    '''
+    Pagina per aggingere un prodotto
 
+        Questa pagina gestisce l'inserimento di nuovi prodotti tramite
+        un form
+
+    '''
     form = Prodotto_form()
     if request.method == 'POST':
         nome = request.form['nome']
@@ -56,13 +73,26 @@ def new_prodotto():
 # Carello 
 @app.route('/carrello', methods = ['GET', 'POST'])
 def carello():
+    '''
+    Pagina che mostra il carello
 
-    return render_template('carrello.html', title = 'Carrello', connesso = controller.user.state_connected(), carello_ = carello)
+        Questa pagina permette di mostrare il carello recuperato dal database
+        e effetuare il ceck out
+
+    '''
+    carello = db.get_carello(controller.user.id)
+    return render_template('carrello.html', title = 'Carrello', carello= carello, connesso = controller.user.state_connected(), carello_ = carello)
 
 
 # Login page
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
+    '''
+    Pagina per gestire il login
+
+        Qusta pagina permette agli utenti di accedere al tuo account
+
+    '''
     db.set_collezione('Utenti')
 
     form = Login_form()
@@ -85,7 +115,13 @@ def login():
 # Pagigina di registrazione
 @app.route('/registrazione', methods = ['GET', 'POST'])
 def registrazione():
+    '''
+    Pagina per gestire la registrazione
 
+        Questa pagina di registrazione contiene un form che permette
+        agli utenti di registrarsi andado a salvare sul db i dati
+
+    '''
     db.set_collezione('Utenti')
 
     form = Registration_form()
@@ -107,7 +143,12 @@ def registrazione():
 # Log out page
 @app.route('/log_out', methods = ['GET'])
 def log_out():
+    '''
+    Pagina per il log_out
 
+        Questa pagina reindirizza il client alla home
+
+    '''
     controller.log_out()
     return redirect(url_for('index', connesso = controller.user.state_connected()))
 

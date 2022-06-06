@@ -1,15 +1,20 @@
+from db import Db_manager
 
+url = 'mongodb://localhost:37000/'
+db = Db_manager(url)
 
 class Prodotto(object):
     id = ''
     nome = ''
+    produttore = ''
     prezzo = 0
     stok = 0
     categoria = ''
 
-    def __init__(self, id, nome, prezzo, stok, categoria):
+    def __init__(self, id, nome, produttore, prezzo, stok, categoria):
         self.id = id
         self.nome = nome
+        self.produttore = produttore
         self.prezzo = prezzo
         self.stok = stok
         self.categoria = categoria
@@ -29,14 +34,14 @@ class Prodotto(object):
 
 class Carrello(object):
     id_utente = ''
-    carello = []
+    lista = []
 
-    def __init__(self, id_utente,carello=[]):
+    def __init__(self, id_utente,lista=[]):
         self.id_utente = id_utente
-        self.carello.append(carello)
+        self.lista.append(lista)
 
     def carica_carello(self, lista):
-        self.carello.append(lista)
+        self.lista.append(lista)
 
     pass
     
@@ -47,11 +52,11 @@ class User(object):
     __connection = False
     carrello  = Carrello(id_utente=id)
 
-
     def __init__(self,id, username, connection=False):
         self.id = id
         self.username = username
         self.__connection = connection
+        pass
 
     def state_connected(self):
         return self.__connection
@@ -75,9 +80,15 @@ class User(object):
         self.carrello.carica_carello(list_pod)
 
     def add_prodotto(self, prodotto):
+        
+
+        return lista
 
 
-        pass
+class Ordine():
+    id_utente = None
+
+
 
 class Controller(object):
     user = User(None, None)
@@ -90,3 +101,4 @@ class Controller(object):
 
     def log_out(self):
         self.user.log_out()
+
