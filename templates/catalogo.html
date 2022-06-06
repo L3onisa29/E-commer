@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+
+{% block content %}
+<a href="/new-prodotto">Aggiungi un prodotto</a>
+
+<table class='mt-3' style="width:100%">
+    <tr>
+      <th>Nome</th>
+      <th>Prezzo</th>
+      <th>Scorta</th>
+    </tr>
+    {% for prodotto in prodotti %}
+        <tr>
+            <td>{{prodotto.nome_prodotto}}</td>
+            <td>{{prodotto.prezzo}}€</td>
+            <td>{{prodotto.disponibilita}}</td>
+            <td><a href="/catalogo?id_prod={{prodotto._id}}&nome_prodotto={{prodotto.nome_prodotto}}&nome_produttore={{prodotto.nome_produttore}}&prezzo={{prodotto.prezzo}}&categoria={{prodotto.categoria}}&stok={{prodotto.disponibilita}}">Aggiungi al carrello</a></td>
+        </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

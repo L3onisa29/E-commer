@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content-section">
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+      <div class="form-group mb-3">
+        {{ form.user.label(class='form-control-label') }}
+        {{ form.user(class='form-control') }}
+      </div>
+      <div class="form-group mb-3">
+        {{ form.pass_.label(class='form-control-label') }}
+        {{ form.pass_(class='form-control') }}
+      </div>
+    </fieldset>
+    <div class="form-group">
+      {{ form.submit(class='btn btn-outline-info') }} 
+    </div>
+  </form>
+</div>
+{% endblock %}

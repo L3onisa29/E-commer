@@ -1,0 +1,34 @@
+{%extends 'base.html'%}
+
+{% block content %}
+<div class="content-section">
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+      <div class="form-group mb-3">
+        {{ form.nome.label(class='form-control-label') }}
+        {{ form.nome(class='form-control') }}
+      </div>
+      <div class="form-group mb-3">
+        {{ form.produttore.label(class='form-control-label') }}
+        {{ form.produttore(class='form-control') }}
+      </div>
+      <div class="form-group mb-3">
+        {{ form.prezzo.label(class='form-control-label') }}
+        {{ form.prezzo(class='form-control') }}
+      </div>
+      <div class="form-group mb-3">
+        {{ form.categoria.label(class='form-control-label') }}
+        {{ form.categoria(class='form-control') }}
+      </div>
+      <div class="form-group mb-3">
+        {{ form.scorta.label(class='form-control-label') }}
+        {{ form.scorta(class='form-control') }}
+      </div>
+    </fieldset> 
+    <div class="form-group">
+      {{ form.submit(class='btn btn-outline-info') }} 
+    </div>
+  </form>
+</div>
+{% endblock %}
