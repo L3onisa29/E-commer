@@ -1,9 +1,16 @@
-from nis import cat
+from operator import imod
 from flask import Flask, redirect, render_template, request, session, url_for
 #from flask_sqlalchemy import SQLAlchemy
 from form import Registration_form, Login_form, Prodotto_form
 from db import Db_manager
 from my_models import *
+
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+
+knn = KNeighborsClassifier(n_neighbors=3)
+
+
 
 
 app = Flask(__name__)
@@ -37,12 +44,13 @@ def catalogo():
         pass
 
     if request.args:
+        if request.args
         prodotto = Prodotto(id=request.args.get('id'), nome=request.args.get('nome'), produttore=request.args.get('nome_produttore'), prezzo=request.args.get('prezzo'), stok=request.args.get('stok'), categoria=request.args.get('categoria'))
         controller.user.add_prodotto(prodotto)
         
 
     prodotti  = db.catalogo()
-    return render_template('catalogo.html', title = 'Prodotti', prodotti= prodotti, connesso = controller.user.state_connected())
+    return render_template('catalogo.html', title = 'Prodotti', user=controller.user.id, prodotti= prodotti, connesso = controller.user.state_connected())
 
 # Aggiunta nuovo prodotto
 @app.route('/new-prodotto', methods = ['GET','POST'])
@@ -63,9 +71,9 @@ def new_prodotto():
         scorta = request.form['scorta']
         try:
             db.inserimento_prodotto(nome, produttore, prezzo, categoria, scorta)
-            return redirect(url_for('catalogo'))
+            return redirect(url_for('catalogo', connesso = controller.user.state_connected()))
         except:
-            return redirect(url_for('new_prodotto'))
+            return redirect(url_for('new_prodotto', connesso = controller.user.state_connected()))
     else:    
         return render_template('new_prodotto.html', form = form, connesso = controller.user.state_connected())
 
@@ -107,7 +115,7 @@ def login():
             return redirect(url_for('index', connesso = controller.user.state_connected()))
         else:
             print('non ci sono')
-            return redirect(url_for('login'))
+            return redirect(url_for('login', connesso = controller.user.state_connected()))
     else:
         return render_template('login.html', title = 'Login', form = form, connesso = controller.user.state_connected())
 
@@ -132,11 +140,11 @@ def registrazione():
         if not db.ricerca_utente(user, pass_):
             try:
                 db.inserimento_utente(user, pass_)
-                return redirect(url_for('login'))
+                return redirect(url_for('login', connesso = controller.user.state_connected()))
             except:
-                return redirect(url_for('registrazione'))
+                return redirect(url_for('registrazione', connesso = controller.user.state_connected()))
         else:
-            return redirect(url_for('registrazione'))
+            return redirect(url_for('registrazione', connesso = controller.user.state_connected()))
     else:
         return render_template('registrazione.html', title = 'Registrazione', form = form, connesso = controller.user.state_connected())
     

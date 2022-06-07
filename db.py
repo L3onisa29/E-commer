@@ -13,6 +13,13 @@ class Db_manager:
         self.my_db = self.connetion['Ecommers']
         pass
     
+    
+
+    # -----------------------------------------------
+    '''
+    Questa sezione è dedicata alle collezioni
+    '''
+
 
     # Posizionamento sulla collezione coretta
     def set_collezione(self, n_col):
@@ -25,7 +32,13 @@ class Db_manager:
 
         self.my_col.insert_one(json)
         pass
+    
+    # -----------------------------------------------
 
+    # -----------------------------------------------
+    '''
+    Questa sezione è dedicata ai prodotti
+    '''
 
     # Funzione che richiede i parametri in input del nuovo prodotto 
     def inserimento_prodotto(self, nome_prodotto, nome_produttore, prezzo, categoria, disponibilita):
@@ -51,7 +64,12 @@ class Db_manager:
             print('caricamento non avvenuto')
         pass
 
+    # -----------------------------------------------
 
+    # -----------------------------------------------
+    '''
+    Questa sezione è dedicata agli utenti
+    '''
     def inserimento_utente(self, user, pass_):
         collezione = 'Utenti'
 
@@ -70,7 +88,11 @@ class Db_manager:
             print('caricamento non avvenuto')
         pass
     
-    
+    # -----------------------------------------------
+    '''
+    Questa sezione è dedicata ai prodotti
+    '''
+
     def ricerca_utente(self, user, pass_):
         my_query = {'user' : user, 'pass' : pass_}
         
@@ -89,6 +111,12 @@ class Db_manager:
         except:
             return False
 
+    # -----------------------------------------------
+    '''
+    Questa sezioene si occupa del recupero dei prodotti
+    da visualizzare nelle pagine
+    '''
+
     def catalogo(self):
         self.set_collezione('Prodotti')
 
@@ -97,8 +125,9 @@ class Db_manager:
             return prodotti
         except:
             return None
-
-    def riempi_carello(self, id_utente, articolo):
+            
+    # Pagina catalogo
+    def riempi_carello(self, id_utente, articoli):
         carello = {
             'id_utente' : '',
             'articol0' : '',
@@ -114,17 +143,16 @@ class Db_manager:
         except:
             print('utente non riconosciuto')
             return
-        
-
+            
         collezione = 'Carrello'
-
-        try:
-            self.__carica_singolo(collezione, articolo)
-            print('caricamento sul carello avvenuto')
-        except:
-            print('errore')
-        pass      
-
+        for articolo in articoli:
+            try:
+                self.__carica_singolo(collezione, articolo)
+                print('caricamento sul carello avvenuto')
+            except:
+                print('errore')
+            
+    # Pagina carello
     def get_carello(self, id_utente):
         self.set_collezione('Carrello')
 
@@ -132,3 +160,5 @@ class Db_manager:
 
         carello = self.my_col.find_one(my_query)
         return carello
+
+    # -----------------------------------------------

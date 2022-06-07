@@ -39,11 +39,11 @@ class Carrello(object):
     def __init__(self, id_utente,lista=[]):
         self.id_utente = id_utente
         self.lista.append(lista)
+        pass
 
     def carica_carello(self, lista):
         self.lista.append(lista)
-
-    pass
+        pass
     
 
 class User(object):
@@ -63,14 +63,16 @@ class User(object):
 
     def login(self):
         self.__connection = True
+        pass
 
     def log_out(self):
         self.__connection = False
+        pass
 
     def add_carrello(self, carrello):
         list_pod = []
         for prodotto in carrello:
-            prod = Prodotto(id=prodotto['_id'], 
+            prod = Prodotto(id=prodotto['id'], 
                             nome=prodotto['nome'], 
                             prezzo=prodotto['prezzo'], 
                             stok=prodotto['stok'], 
@@ -78,16 +80,21 @@ class User(object):
             list_pod.append(prod)
 
         self.carrello.carica_carello(list_pod)
+        pass
 
     def add_prodotto(self, prodotto):
-        
+        prod = Prodotto(id=prodotto['id'], 
+                            nome=prodotto['nome'], 
+                            prezzo=prodotto['prezzo'], 
+                            stok=prodotto['stok'], 
+                            categoria=prodotto['categoria'])
+        self.carrello.lista.append(prod)
+        self.carica_carello()
+        pass
 
-        return lista
-
-
-class Ordine():
-    id_utente = None
-
+    def carica_carello(self):
+        db.riempi_carello(self.id, self.carrello)
+        pass
 
 
 class Controller(object):
