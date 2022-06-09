@@ -13,11 +13,9 @@ class Db_manager:
         self.my_db = self.connetion['Ecommers']
         pass
     
-    
-
     # -----------------------------------------------
     '''
-    Questa sezione è dedicata alle collezioni
+        Questa sezione è dedicata alle collezioni
     '''
 
 
@@ -37,7 +35,7 @@ class Db_manager:
 
     # -----------------------------------------------
     '''
-    Questa sezione è dedicata ai prodotti
+        Questa sezione è dedicata ai prodotti
     '''
 
     # Funzione che richiede i parametri in input del nuovo prodotto 
@@ -68,7 +66,7 @@ class Db_manager:
 
     # -----------------------------------------------
     '''
-    Questa sezione è dedicata agli utenti
+        Questa sezione è dedicata agli utenti
     '''
     def inserimento_utente(self, user, pass_):
         collezione = 'Utenti'
@@ -87,12 +85,7 @@ class Db_manager:
         except:
             print('caricamento non avvenuto')
         pass
-    
-    # -----------------------------------------------
-    '''
-    Questa sezione è dedicata ai prodotti
-    '''
-
+        
     def ricerca_utente(self, user, pass_):
         my_query = {'user' : user, 'pass' : pass_}
         
@@ -112,11 +105,14 @@ class Db_manager:
             return False
 
     # -----------------------------------------------
+
+    # -----------------------------------------------
     '''
-    Questa sezioene si occupa del recupero dei prodotti
-    da visualizzare nelle pagine
+        Questa sezioene si occupa del recupero dei prodotti
+        da visualizzare nelle pagine
     '''
 
+    # Pagina catalogo
     def catalogo(self):
         self.set_collezione('Prodotti')
 
@@ -125,7 +121,7 @@ class Db_manager:
             return prodotti
         except:
             return None
-            
+
     # Pagina catalogo
     def riempi_carello(self, id_utente, articoli):
         carello = {

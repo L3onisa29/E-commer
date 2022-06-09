@@ -44,7 +44,6 @@ def catalogo():
         pass
 
     if request.args:
-        if request.args
         prodotto = Prodotto(id=request.args.get('id'), nome=request.args.get('nome'), produttore=request.args.get('nome_produttore'), prezzo=request.args.get('prezzo'), stok=request.args.get('stok'), categoria=request.args.get('categoria'))
         controller.user.add_prodotto(prodotto)
         
