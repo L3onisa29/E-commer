@@ -151,7 +151,7 @@ class Db_manager:
 
     # -----------------------------------------------
     '''
-        Questa sezione è dedicata ai prodotti
+        Questa sezione è dedicata al carello
     '''
 
     # Pagina carello
