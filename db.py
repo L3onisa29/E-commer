@@ -35,37 +35,6 @@ class Db_manager:
 
     # -----------------------------------------------
     '''
-        Questa sezione è dedicata ai prodotti
-    '''
-
-    # Funzione che richiede i parametri in input del nuovo prodotto 
-    def inserimento_prodotto(self, nome_prodotto, nome_produttore, prezzo, categoria, disponibilita):
-        collezione = 'Prodotti'
-        prodotto = {
-            'nome_prodotto' : '',
-            'nome_produttore' : '',
-            'prezzo' : 0,
-            'disponibilita' : 0,
-            'categoria' : ''
-        }
-
-        prodotto['nome_prodotto'] = nome_prodotto
-        prodotto['nome_produttore'] = nome_produttore
-        prodotto['prezzo'] = prezzo
-        prodotto['disponibilita'] = disponibilita
-        prodotto['categoria'] = categoria
-
-        try:
-            self.__carica_singolo(collezione, prodotto)
-            print('caricato con successo')
-        except:
-            print('caricamento non avvenuto')
-        pass
-
-    # -----------------------------------------------
-
-    # -----------------------------------------------
-    '''
         Questa sezione è dedicata agli utenti
     '''
     def inserimento_utente(self, user, pass_):
@@ -108,8 +77,38 @@ class Db_manager:
 
     # -----------------------------------------------
     '''
-        Questa sezioene si occupa del recupero dei prodotti
-        da visualizzare nelle pagine
+        Questa sezione è dedicata ai prodotti
+    '''
+
+    # Funzione che richiede i parametri in input del nuovo prodotto 
+    def inserimento_prodotto(self, nome_prodotto, nome_produttore, prezzo, categoria, disponibilita):
+        collezione = 'Prodotti'
+        prodotto = {
+            'nome_prodotto' : '',
+            'nome_produttore' : '',
+            'prezzo' : 0,
+            'disponibilita' : 0,
+            'categoria' : ''
+        }
+
+        prodotto['nome_prodotto'] = nome_prodotto
+        prodotto['nome_produttore'] = nome_produttore
+        prodotto['prezzo'] = prezzo
+        prodotto['disponibilita'] = disponibilita
+        prodotto['categoria'] = categoria
+
+        try:
+            self.__carica_singolo(collezione, prodotto)
+            print('caricato con successo')
+        except:
+            print('caricamento non avvenuto')
+        pass
+
+    # -----------------------------------------------
+
+    # -----------------------------------------------
+    '''
+        Questa sezione è dedicata al catalogo prodotti
     '''
 
     # Pagina catalogo
@@ -147,7 +146,14 @@ class Db_manager:
                 print('caricamento sul carello avvenuto')
             except:
                 print('errore')
-            
+
+    # -----------------------------------------------
+
+    # -----------------------------------------------
+    '''
+        Questa sezione è dedicata ai prodotti
+    '''
+
     # Pagina carello
     def get_carello(self, id_utente):
         self.set_collezione('Carrello')

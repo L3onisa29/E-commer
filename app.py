@@ -1,17 +1,13 @@
 from operator import imod
-from flask import Flask, redirect, render_template, request, session, url_for
+from flask import Flask, redirect, render_template, request, url_for
 #from flask_sqlalchemy import SQLAlchemy
 from form import Registration_form, Login_form, Prodotto_form
 from db import Db_manager
 from my_models import *
-
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 
 knn = KNeighborsClassifier(n_neighbors=3)
-
-
-
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'b34004572a3bb22eb8af01cfb813edf1'
@@ -28,8 +24,6 @@ def index():
     return render_template('index.html', title = 'Home', connesso = controller.user.state_connected())
 
 # Catalogo
-
-
 @app.route('/catalogo', methods = ['GET', 'POST'])
 def catalogo():
     '''
